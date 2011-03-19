@@ -47,7 +47,7 @@ table = cbind(readLines("Date.txt"),
 length(table[,1])  #ans: 447380
 
 # cut out all emails for which the "Date" row doesn't start with "Date"
-# This eliminates malformed email headers
+# this eliminates malformed email headers
 
 table = subset(table, grepl("^Date:", table[,1]) & grepl("^From:", table[,2]) & 
 				grepl("^To:", table[,3]) & grepl("^Subject:", table[,4]) )
