@@ -19,6 +19,8 @@ while(left > 0)
 
 	# identify the rows which start with "From: "
 	index = grep("^From: (.*)@[a-zA-Z_]+?\\.[a-zA-Z]{3}", interval)
+	indexBody = grep("", interval)
+
 
 	# identify the rows which have the Date, To, and Subject by
 	# their position relative to the "From" rows
@@ -40,8 +42,6 @@ while(left > 0)
 table = cbind(readLines("Date.txt"), 
 			readLines("From.txt"), readLines("To.txt"), readLines("Subject.txt"))
 
-# save the table, so that the process-time-intensive steps don't need repeating
-#save(table, file = "emailheaders.rda")
 
 # determine the number of emails in the table, including malformed emails
 length(table[,1])  #ans: 447380
@@ -64,9 +64,8 @@ table[,2] = gsub("^From: ", "", table[,2])
 table[,3] = gsub("^To: ", "", table[,3])
 table[,4] = gsub("^Subject: ", "", table[,4])
 
-# create a small subset of the data for testing code
-tablesample = table[1:100,]
+# save the table, so that the process-time-intensive steps don't need repeating
+#save(table, file = "emailheaders.rda")
 
-###################### create network graph  
 
 
